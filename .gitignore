@@ -1,6 +1,12 @@
-# If you prefer the allow list template instead of the deny list, see community template:
-# https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
-#
+# ################ #
+# Ceneral          #
+# ################ #
+*.log
+.DS_Store
+
+# ################ #
+# Go               #
+# ################ #
 # Binaries for programs and plugins
 *.exe
 *.exe~
@@ -11,22 +17,55 @@
 # Test binary, built with `go test -c`
 *.test
 
-# Code coverage profiles and other test artifacts
+# Output of the go coverage tool, specifically when run with the -o option
 *.out
-coverage.*
-*.coverprofile
-profile.cov
 
-# Dependency directories (remove the comment below to include it)
-# vendor/
+# Project-specific
+# コンパイル後のGoサーバー実行ファイルを無視する
+server/life-assist-server
 
-# Go workspace file
-go.work
-go.work.sum
 
-# env file
-.env
+# ################ #
+# Python           #
+# ################ #
+# Virtualenv
+venv/
+/venv/
+.venv/
+/.venv/
 
-# Editor/IDE
-# .idea/
-# .vscode/
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib62/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ################ #
+# Project-specific #
+# ################ #
+# SQLite database
+*.db
+*.db-journal
+
+# Temporary audio files
+*.wav
