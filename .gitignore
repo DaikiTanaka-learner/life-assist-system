@@ -1,0 +1,14 @@
+# Node.js
+/node_modules
+/frontend/dist
+npm-debug.log*
+
+# Go
+/api-server/api-server
+
+# Python
+/ml-service/__pycache__/
+*.pyc
+
+# OS
+.DS_Store
