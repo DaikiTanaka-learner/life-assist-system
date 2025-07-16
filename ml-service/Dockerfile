@@ -1,18 +1,20 @@
-# ベースイメージとして公式のPythonイメージを使用
-FROM python:3.11-slim
+    # ベースイメージとして軽量なPython 3.10-slimを選択
+    FROM python:3.10-slim
 
-# 作業ディレクトリを設定
-WORKDIR /app
+    # --- この部分を追加 ---
+    # ffmpegをインストールするためのコマンド
+    # apt-get updateでパッケージリストを更新し、ffmpegをインストールする
+    RUN apt-get update && apt-get install -y ffmpeg
 
-# 依存関係ファイルを先にコピーしてインストール
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+    # 作業ディレクトリを設定
+    WORKDIR /app
 
-# プロジェクトのソースコードをすべてコピー
-COPY . .
+    # 最初にライブラリをインストール
+    COPY requirements.txt requirements.txt
+    RUN pip install --no-cache-dir -r requirements.txt
 
-# 8000ポートを公開
-EXPOSE 8000
+    # アプリケーションのコードをコピー
+    COPY . .
 
-# コンテナ起動時に実行するコマンド (uvicornサーバーを起動)
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+    # コンテナ起動時に実行するコマンド
+    CMD ["python", "main.py"]

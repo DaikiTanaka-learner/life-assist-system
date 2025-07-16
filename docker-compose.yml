@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  # Goで記述されたAPIサーバー
+  api-server:
+    build: ./api-server
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./api-server:/app
+    tty: true
+
+  # Pythonで記述されたAIエンジン
+  ml-service:
+    build: ./ml-service
+    ports:
+      - "8001:8000"
+    volumes:
+      # アプリケーションのコードをマウント
+      - ./ml-service:/app
+      # テスト用の音声ファイルがあるディレクトリをマウント
+      - ./sample-voice:/app/sample-voice
+    tty: true
+    # GPUを使いたい場合は、以下のdeployセクションのコメントを外す
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
